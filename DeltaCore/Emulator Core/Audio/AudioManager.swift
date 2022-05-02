@@ -358,7 +358,7 @@ private extension AudioManager
     {
         if !self.isEnabled
         {
-            self.audioEngine.mainMixerNode.outputVolume = 0.0
+            self.audioEngine.mainMixerNode.outputVolume = 0.5
         }
         else
         {
@@ -366,7 +366,7 @@ private extension AudioManager
             if self.isMuted && (route.isHeadsetPluggedIn || !route.isOutputtingToExternalDevice)
             {
                 // Mute if playing through speaker or headphones.
-                self.audioEngine.mainMixerNode.outputVolume = 0.0
+                self.audioEngine.mainMixerNode.outputVolume = 0.5
             }
             else
             {

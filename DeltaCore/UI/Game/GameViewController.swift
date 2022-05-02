@@ -87,6 +87,7 @@ open class GameViewController: UIViewController, GameControllerReceiver
         return self.gameViews.first
     }
     public private(set) var gameViews: [GameView] = []
+    public var externalFilters: [CIFilter] = []
         
     open private(set) var controllerView: ControllerView!
     private var splitViewInputViewHeight: CGFloat = 0
@@ -381,6 +382,10 @@ extension GameViewController
                     filters.append(contentsOf: screenFilters)
                 }
                 
+                if self.externalFilters.count > 0 {
+                    filters.append(contentsOf: self.externalFilters)
+                }
+                
                 if filters.isEmpty
                 {
                     gameView.filter = nil
@@ -402,7 +407,12 @@ extension GameViewController
         {
             for gameView in self.gameViews
             {
-                gameView.filter = nil
+                var filters = [CIFilter]()
+                if self.externalFilters.count > 0 {
+                    filters.append(contentsOf: self.externalFilters)
+                }
+                let filterChain = FilterChain(filters: filters)
+                gameView.filter = filterChain
             }
             
             gameViews.append(self.gameView)

@@ -179,7 +179,20 @@ private extension GameView
 {
     func makeContext() -> CIContext
     {
-        let context = CIContext(eaglContext: self.glkView.context, options: [.workingColorSpace: NSNull()])
+        var context: CIContext
+        if #available(iOS 13.0, *) {
+            context = CIContext(eaglContext: self.glkView.context,
+                                    options: [.workingColorSpace: NSNull(),
+                                              .useSoftwareRenderer: false,
+                                              .allowLowPower: true,
+                                              .cacheIntermediates: false])
+        } else {
+            // Fallback on earlier versions
+            context = CIContext(eaglContext: self.glkView.context,
+                                options: [.workingColorSpace: NSNull(),
+                                          .useSoftwareRenderer: false,
+                                          .cacheIntermediates: false])
+        }
         return context
     }
     
