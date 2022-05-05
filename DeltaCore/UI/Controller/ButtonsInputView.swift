@@ -29,7 +29,7 @@ class ButtonsInputView: UIView
     
     private let imageView = UIImageView(frame: .zero)
     
-    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+    private let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
     
     private var touchInputsMappingDictionary: [UITouch: Set<AnyInput>] = [:]
     private var previousTouchInputs = Set<AnyInput>()

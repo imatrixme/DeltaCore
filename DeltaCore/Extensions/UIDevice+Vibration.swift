@@ -69,7 +69,11 @@ public extension UIDevice
             
             AudioServicesPlaySystemSoundWithVibration(kSystemSoundID_Vibrate, nil, dictionary as NSDictionary)
         
-        case .basic, .feedbackGenerator: AudioServicesPlaySystemSound(1519) // "peek" vibration
+        case .basic: AudioServicesPlaySystemSound(1519) // "peek" vibration
+        case .feedbackGenerator:
+            let generator = UIImpactFeedbackGenerator.init(style: .light)
+            generator.prepare()
+            generator.impactOccurred()
         }
     }
 }
